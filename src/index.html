@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>数学口算出题系统</title>
+  <link href="../node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+    body,html{
+      margin:0px;
+      height:100%;
+    }
+
+    #txtEditor{
+      width:100%;
+      height:40px;
+      padding:0px;
+      margin:0px;
+      border:0px;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+<div class="panel panel-success">
+  <div class="panel-heading"></div>
+    <form>
+      <div class="table-responsive">
+        <table class="table">
+          <tr>
+            <td>
+              <div class="input-group">
+                <div class="input-group-addon">出题量</div>
+                <input type="text" class="form-control" id="txtAmount" name="txtAmount" placeholder="100">
+              </div>
+            </td>
+            <td>
+              <div class="input-group">
+                <div class="input-group-addon">学生姓名</div>
+                <input type="text" class="form-control" id="txtName" name="txtName" placeholder="">
+              </div>
+            </td>
+            <td>
+              <div class="input-group">
+                <div class="input-group-addon">学生班级</div>
+                <input type="text" class="form-control" id="txtClass" name="txtClass" placeholder="">
+              </div>
+            </td>
+            <td>
+              <div class="input-group">
+                <div class="input-group-addon">学生学号</div>
+                <input type="text" class="form-control" id="txtNumber" name="txtNumber" placeholder="">
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td colspan="2" style="text-align: center;">
+              <select class="form-control" id="txtType" name="txtType" size="5">
+                <option value="1">10以内加法</option>
+                <option value="2">10以内减法</option>
+                <option value="3">10以内加减综合</option>
+                <option value="4">10以内连加</option>
+                <option value="5">10以内连减</option>
+                <option value="6">10以内连续加减综合</option>
+                <option value="7">20以内不进位加法</option>
+                <option value="8">20以内不退位减法</option>
+                <option value="9">20以内不进位不退位加减综合</option>
+                <option value="10">20以内进位加法</option>
+                <option value="11">20以内退位减法</option>
+                <option value="12">20以内进位退位加减综合</option>
+                <option value="13">20以内连加</option>
+                <option value="14">20以内连减</option>
+                <option value="15">20以内连减连续加减综合</option>
+                <option value="16">一年级上学期综合练习</option>
+                <option value="17">100以内不进位加整十数</option>
+                <option value="18">100以内不进位加一位数</option>
+                <option value="19">100以内不进位加两位数</option>
+                <option value="20">100以内不退位减整十数</option>
+                <option value="21">100以内不退位减一位数</option>
+                <option value="22">100以内不退位减两位数</option>
+                <option value="23">100以内进位加一位数</option>
+                <option value="24">100以内进位加两位数</option>
+                <option value="25">100以内不进位不退位综合</option>
+                <option value="26">100以内退位减一位数</option>
+                <option value="27">100以内退位减两位数</option>
+                <option value="28">100以内进位退位加减综合</option>
+                <option value="29">100以内连加</option>
+                <option value="30">100以内连减</option>
+                <option value="31">100以内连加连减综合</option>
+                <option value="32">一年级下学期加减综合</option>
+              </select>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td style="text-align: right;">
+              <button id="btnGenerate" name="btnGenerate" type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span> 生成试题</button>
+            </td>
+            <td>
+              <button id="btnPrint" name="btnPrint" type="button" class="btn btn-default" disabled="disabled"><span class="glyphicon glyphicon-print" aria-hidden="true"></span> 打印试题</button>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+    </form>
+  <div class="panel-footer">Made with <span style="color: red;" class="glyphicon glyphicon-heart" aria-hidden="true"></span> by Neo</div>
+</div>
+
+<div class="panel panel-success">
+  <div class="panel-heading"></div>
+    <div class="table-responsive">
+      <table class="table">
+        <tr>
+          <td colspan="4" style="text-align: center;">口算练习</td>
+        </tr>
+        <tr>
+          <td>学生姓名：</td>
+          <td>学生班级：</td>
+          <td>学生学号：</td>
+          <td>完成时间：</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </table>
+    </div>
+</div>
+
+<div class="well">
+  We are using io.js <script>document.write(process.version)</script>
+  and Electron <script>document.write(process.versions['electron'])</script>.
+  <input type="button" name="btnOK" value="OK" class="btn-danger" />
+</div>
+
+<textarea id="txtEditor"></textarea>
+</body>
+<script>
+    window.$ = window.jQuery = require('../node_modules/jquery/dist/jquery.min.js');
+    require('../node_modules/bootstrap/dist/js/bootstrap.min.js');
+    require('./index.js');
+</script>
+</html>
+
