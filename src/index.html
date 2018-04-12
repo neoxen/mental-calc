@@ -30,7 +30,7 @@
             <td>
               <div class="input-group">
                 <div class="input-group-addon">出题量</div>
-                <input type="text" class="form-control" id="txtAmount" name="txtAmount" placeholder="100">
+                <input type="text" class="form-control" id="txtAmount" name="txtAmount" value="100">
               </div>
             </td>
             <td>
@@ -116,27 +116,15 @@
           <td colspan="4" style="text-align: center;">口算练习</td>
         </tr>
         <tr>
-          <td>学生姓名：</td>
-          <td>学生班级：</td>
-          <td>学生学号：</td>
+          <td>学生姓名：<span id="spanName"></span></td>
+          <td>学生班级：<span id="spanClass"></span></td>
+          <td>学生学号：<span id="spanNumber"></span></td>
           <td>完成时间：</td>
         </tr>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
       </table>
+      <div id="calcProblems" class="table-responsive"></div>
     </div>
 </div>
-
-<div class="well">
-  We are using io.js <script>document.write(process.version)</script>
-  and Electron <script>document.write(process.versions['electron'])</script>.
-  <input type="button" name="btnOK" value="OK" class="btn-danger" />
-</div>
-
 <textarea id="txtEditor"></textarea>
 </body>
 <script>

@@ -2,17 +2,12 @@ import { ipcRenderer, remote } from 'electron';
 
 const { Menu, MenuItem, dialog } = remote;
 
-let currentFile = null; //当前文档保存的路径
-let isSaved = true;     //当前文档是否已保存
-let txtEditor = document.getElementById('txtEditor'); //获得TextArea文本框的引用
+let currentFile = null; // 当前文档保存的路径
+let isSaved = true;     // 当前文档是否已保存
+let txtEditor = document.getElementById('txtEditor'); // 获得TextArea文本框的引用
 
-document.title = "数学口算出题系统"; //设置文档标题，影响窗口标题栏名称
+document.title = "数学口算出题系统"; // 设置文档标题，影响窗口标题栏名称
 
-
-txtEditor.addEventListener('contextmenu', (e)=>{
-    e.preventDefault();
-    contextMenu.popup(remote.getCurrentWindow());
-});
 
 //监控文本框内容是否改变
 txtEditor.oninput=(e)=>{
@@ -86,7 +81,7 @@ function saveCurrentDoc(){
     }
 }
 
-//如果需要保存，弹出保存对话框询问用户是否保存当前文档
+// 如果需要保存，弹出保存对话框询问用户是否保存当前文档
 function askSaveIfNeed(){
     if(isSaved) return;
     const response=dialog.showMessageBox(remote.getCurrentWindow(), {
@@ -94,13 +89,25 @@ function askSaveIfNeed(){
         type: 'question',
         buttons: [ 'Yes', 'No' ]
     });
-    if(response==0) saveCurrentDoc(); //点击Yes按钮后保存当前文档
+    if(response==0) saveCurrentDoc(); // 点击Yes按钮后保存当前文档
 }
 
 
-let selectTxtType = document.getElementById('txtType');
-let btnGenerate = document.getElementById('btnGenerate');
-let btnPrint = document.getElementById('btnPrint');
+const selectTxtType = document.getElementById('txtType');
+const btnGenerate = document.getElementById('btnGenerate');
+const btnPrint = document.getElementById('btnPrint');
+
+const txtType = document.getElementById('txtType');
+const calcProlems = document.getElementById('calcProblems');
+
+const txtAmount = document.getElementById('txtAmount');
+const txtName = document.getElementById('txtName');
+const txtClass = document.getElementById('txtClass');
+const txtNumber = document.getElementById('txtNumber');
+
+const spanName = document.getElementById('spanName');
+const spanClass = document.getElementById('spanClass');
+const spanNumber = document.getElementById('spanNumber');
 
 selectTxtType.onclick=(e)=>{
     btnGenerate.className = 'btn btn-success';
@@ -110,5 +117,34 @@ selectTxtType.onclick=(e)=>{
 btnGenerate.onclick=(e)=>{
     btnPrint.className = 'btn btn-success';
     btnPrint.disabled = false;
+
+    spanName.innerText = txtName.value;
+    spanClass.innerText = txtClass.value;
+    spanNumber.innerText = txtNumber.value;
+
+    let pArray =  generateProblems(txtAmount.value);
+
+    let problemType = txtType.value;
+    let problems = '<ul style="">\n';
+
+    for ( let i = 1; i < pArray.length; i++) {
+        problems += '<li style="text-align: left;display: inline-block;width: 180px;">' + pArray[i] + '</li>\n';
+    }
+    problems += '</ul>\n';
+    calcProlems.innerHTML = problems;
 };
+
+function generateProblems(amount){
+    const problemArray = new Array(amount);
+
+    for (let i = 0; i < amount; i++){
+        problemArray.push(randomRange(0, 9) + '+' + randomRange(0, 9) + '=');
+    }
+
+    return problemArray;
+}
+
+function randomRange(myMin, myMax){
+    return Math.floor(Math.random() * (myMax - myMin + 1) + myMin);
+}
 
