@@ -128,7 +128,7 @@ btnGenerate.onclick=(e)=>{
     let problems = '<ul style="">\n';
 
     for ( let i = 1; i < pArray.length; i++) {
-        problems += '<li style="text-align: left;display: inline-block;width: 180px;">' + pArray[i] + '</li>\n';
+        problems += '<li style="text-align: left;display: inline-block;width: 160px;">' + pArray[i] + '</li>\n';
     }
     problems += '</ul>\n';
     calcProlems.innerHTML = problems;
@@ -147,4 +147,14 @@ function generateProblems(amount){
 function randomRange(myMin, myMax){
     return Math.floor(Math.random() * (myMax - myMin + 1) + myMin);
 }
+
+
+btnPrint.addEventListener('click', function (event) {
+    ipcRenderer.send('print-to-pdf');
+});
+
+ipcRenderer.on('wrote-pdf', function (event, path) {
+    const message = `PDF 保存到: ${path}`;
+    document.getElementById('pdf-path').innerHTML = message;
+})
 
